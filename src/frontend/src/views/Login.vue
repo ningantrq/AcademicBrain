@@ -6,7 +6,7 @@
           <img class="logo" src="@/assets/logo.svg" alt="Academic Brain" />
           <div class="qrcode">
             <div class="qrcode-placeholder">
-              <el-icon size="60"><QrCode /></el-icon>
+              <el-icon size="60"><User /></el-icon>
             </div>
           </div>
           <div class="tip">使用手机扫码登录</div>
@@ -76,7 +76,7 @@
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage, type FormInstance, type FormRules } from 'element-plus'
-import { User, Lock, QrCode } from '@element-plus/icons-vue'
+import { User, Lock } from '@element-plus/icons-vue'
 import { useUserStore } from '@/store/user'
 import type { LoginForm } from '@/api/auth'
 
@@ -102,22 +102,34 @@ const loginRules: FormRules = {
 }
 
 const handleLogin = async () => {
-  if (!loginFormRef.value) return
+  console.log('点击登录按钮')
+  if (!loginFormRef.value) {
+    console.log('loginFormRef.value 为空')
+    return
+  }
   
-  await loginFormRef.value.validate(async (valid) => {
+  console.log('开始表单验证')
+  try {
+    const valid = await loginFormRef.value.validate()
+    console.log('表单验证结果:', valid)
     if (valid) {
       loading.value = true
+      console.log('发送登录请求:', loginForm)
       try {
         await userStore.loginUser(loginForm)
         ElMessage.success('登录成功')
         router.push('/')
       } catch (error: any) {
+        console.log('登录失败:', error)
         ElMessage.error(error.message || '登录失败')
       } finally {
         loading.value = false
       }
     }
-  })
+  } catch (error) {
+    console.log('表单验证失败:', error)
+    // 验证失败，不执行登录逻辑
+  }
 }
 </script>
 

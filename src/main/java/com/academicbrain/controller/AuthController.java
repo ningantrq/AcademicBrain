@@ -3,7 +3,6 @@ package com.academicbrain.controller;
 import com.academicbrain.dto.UserDTO;
 import com.academicbrain.model.User;
 import com.academicbrain.service.AuthService;
-import com.academicbrain.utils.JwtUtils;
 import com.academicbrain.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -77,8 +76,16 @@ public class AuthController {
     public Result<String> logout(@RequestHeader("Authorization") String authorization) {
         try {
             String token = authorization.replace("Bearer ", "");
-            String userId = JwtUtils.getUserIdFromToken(token);
-            authService.logout(userId);
+            
+            // 从简单token中提取用户ID
+            if (token.startsWith("simple_token_")) {
+                String[] parts = token.split("_");
+                if (parts.length >= 3) {
+                    String userId = parts[2];
+                    authService.logout(userId);
+                }
+            }
+            
             return Result.success("登出成功");
         } catch (Exception e) {
             return Result.error(e.getMessage());

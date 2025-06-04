@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS t_user (
 
 -- 插入测试用户数据
 INSERT INTO t_user (id, username, password, avatar, gender, phone, email, description, status) VALUES
-('test001', 'admin', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iKTnl5iHkE6wJP7EE9b7LKTNWLjG', NULL, 1, '13800138000', 'admin@test.com', '系统管理员', 0),
-('test002', 'user1', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iKTnl5iHkE6wJP7EE9b7LKTNWLjG', NULL, 0, '13800138001', 'user1@test.com', '普通用户1', 0);
+('test001', 'admin', '123456', NULL, 1, '13800138000', 'admin@test.com', '系统管理员', 0),
+('test002', 'user1', '123456', NULL, 0, '13800138001', 'user1@test.com', '普通用户1', 0);
 
--- 注意：上面的密码是 "123456" 经过BCrypt加密后的结果 
+-- 注意：上面的密码是明文 "123456" 

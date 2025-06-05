@@ -19,6 +19,7 @@ import java.util.Map;
 @Api(tags = "用户认证")
 @RestController
 @RequestMapping("/api/auth")
+//@RequestMapping("/api/user")
 @CrossOrigin(origins = "*")
 public class AuthController {
 

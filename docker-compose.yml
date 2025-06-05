@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  # MySQL数据库
+  mysql:
+    image: mysql:8.0
+    container_name: academic-brain-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: academic_brain
+      MYSQL_USER: academic
+      MYSQL_PASSWORD: academic123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./src/main/resources/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - academic-brain-network
+
+  # Redis缓存
+  redis:
+    image: redis:6.0-alpine
+    container_name: academic-brain-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - academic-brain-network
+
+  # 后端服务
+  backend:
+    build: .
+    container_name: academic-brain-backend
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/academic_brain?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+      SPRING_DATASOURCE_USERNAME: academic
+      SPRING_DATASOURCE_PASSWORD: academic123
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - academic-brain-network
+    restart: unless-stopped
+
+  # 前端服务
+  frontend:
+    build: ./src/frontend
+    container_name: academic-brain-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - academic-brain-network
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+  redis_data:
+
+networks:
+  academic-brain-network:
+    driver: bridge 

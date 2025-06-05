@@ -1,28 +1,14 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <router-view :key="routerKey"></router-view>
 </template>
 
 <script setup lang="ts">
-// 主应用组件
+import { useRoute } from "vue-router";
+import { computed } from "vue";
+const route = useRoute();
+const routerKey = computed(() => {
+  return route.path + Math.random();
+});
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #f5f5f5;
-}
-</style> 
+<style scoped></style>

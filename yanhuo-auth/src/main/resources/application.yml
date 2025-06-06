@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: yanhuo-auth
+  profiles:
+    active: test
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/xhs?serverTimezone=UTC&useSSL=false
+    username: root     # ← 替换为你的数据库用户名
+    password: ABC18051537832   # ← 替换为你的数据库密码
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update     # 第一次可以用 create 自动建表，后续改为 update 或 none
+    show-sql: true          # 控制台打印 SQL
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+server:
+  port: 8801
+  servlet:
+    context-path: /auth

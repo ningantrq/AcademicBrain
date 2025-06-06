@@ -14,6 +14,7 @@ import com.yanhuo.xo.vo.CommentVo;
 import com.yanhuo.xo.vo.LikeOrCollectionVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
 @Service
 public class LikeOrCollectionServiceImpl extends ServiceImpl<LikeOrCollectionDao, LikeOrCollection> implements LikeOrCollectionService {
     @Autowired
+    @Lazy
     NoteService noteService;
 
     @Autowired
@@ -38,9 +40,11 @@ public class LikeOrCollectionServiceImpl extends ServiceImpl<LikeOrCollectionDao
     CommentSyncService commentSyncService;
 
     @Autowired
+    @Lazy
     AlbumService albumService;
 
     @Autowired
+    @Lazy
     UserService userService;
 
     @Autowired

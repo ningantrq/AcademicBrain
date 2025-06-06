@@ -13,6 +13,7 @@ import com.yanhuo.xo.dto.CommentDTO;
 import com.yanhuo.xo.entity.*;
 import com.yanhuo.xo.vo.CommentVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,12 +27,15 @@ import java.util.stream.Collectors;
 public class CommentServiceImpl extends ServiceImpl<CommentDao, Comment> implements CommentService {
 
     @Autowired
+    @Lazy
     NoteService noteService;
 
     @Autowired
+    @Lazy
     UserService userService;
 
     @Autowired
+    @Lazy
     LikeOrCollectionService likeOrCollectionService;
 
     @Autowired

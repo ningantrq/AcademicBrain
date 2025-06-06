@@ -14,6 +14,7 @@ import com.yanhuo.xo.entity.Note;
 import com.yanhuo.xo.entity.User;
 import com.yanhuo.xo.vo.NoteSearchVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,9 +29,11 @@ import java.util.stream.Collectors;
 public class AlbumNoteRelationServiceImpl extends ServiceImpl<AlbumNoteRelationDao, AlbumNoteRelation> implements AlbumNoteRelationService {
 
     @Autowired
+    @Lazy
     NoteService noteService;
 
     @Autowired
+    @Lazy
     UserService userService;
 
     @Override

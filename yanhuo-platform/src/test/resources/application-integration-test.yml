@@ -1,0 +1,52 @@
+spring:
+  profiles:
+    active: integration-test
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MySQL
+    username: sa
+    password: 
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  h2:
+    console:
+      enabled: false
+  cloud:
+    openfeign:
+      client:
+        default-to-properties: true
+    nacos:
+      discovery:
+        enabled: false
+      config:
+        enabled: false
+  redis:
+    timeout: 1000ms
+    host: localhost
+    port: 6379
+    password: 
+    database: 0
+
+# 禁用XXL-Job
+xxl:
+  job:
+    admin:
+      addresses: 
+    executor:
+      enabled: false
+      appname: test-app
+      ip: 
+      port: -1
+      logpath: /tmp/xxl-job
+      logretentiondays: -1
+
+logging:
+  level:
+    com.yanhuo: DEBUG
+    org.springframework.test: DEBUG
+    com.xxl.job: WARN
+    org.springframework.cloud: WARN 

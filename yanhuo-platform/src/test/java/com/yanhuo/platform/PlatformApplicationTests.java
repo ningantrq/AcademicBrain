@@ -24,8 +24,6 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.spring.web.json.Json;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,8 +32,7 @@ import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@SpringBootTest(classes = TestApplication.class)
-@ActiveProfiles("test")
+@SpringBootTest(classes = PlatformApplication.class)
 @Slf4j
 public class PlatformApplicationTests {
 

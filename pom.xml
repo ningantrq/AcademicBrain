@@ -29,14 +29,14 @@
     </properties>
 
     <modules>
-        <module>yanhuo-platform</module>
-        <module>yanhuo-gateway</module>
-        <module>yanhuo-auth</module>
-        <module>yanhuo-xo</module>
-        <module>yanhuo-common</module>
-        <module>yanhuo-util</module>
-        <module>yanhuo-im</module>
-        <module>yanhuo-search</module>
+        <module>platform</module>
+        <module>gateway</module>
+        <module>auth</module>
+        <module>xo</module>
+        <module>common</module>
+        <module>util</module>
+        <module>im</module>
+        <module>search</module>
     </modules>
 
     <dependencyManagement>

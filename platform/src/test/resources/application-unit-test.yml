@@ -1,0 +1,40 @@
+spring:
+  profiles:
+    active: unit-test
+  main:
+    allow-bean-definition-overriding: true
+  autoconfigure:
+    exclude:
+      - com.yanhuo.platform.config.XxlJobConfig
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: 
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+
+# 禁用所有外部依赖
+xxl:
+  job:
+    executor:
+      enabled: false
+    admin:
+      addresses: 
+
+logging:
+  level:
+    com.yanhuo: WARN
+    com.xxl.job: OFF
+    org.springframework.cloud: OFF
+    org.springframework.boot.autoconfigure: WARN 
